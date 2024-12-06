@@ -8,56 +8,56 @@
 
 ## How to use
 
-1. Clone or download this repository, example using git:
+Clone or download this repository, example using [git](https://git-scm.com/):
 
 ```sh
 git clone https://github.com/PeterLesiak/instaling-solver.git
 ```
 
-2. Install dependencies, **NodeJS required**
+Install dependencies, **[nodejs](https://nodejs.org/en) required**
 
 ```sh
 npm ci
 ```
 
-3. Build from source
+Build from source
 
 ```sh
 npm run build
 ```
 
-4. Now you can start using the script
+Now you can start using the script
 
 ```sh
-node ./dist/index.js <USERNAME> <PASSWORD>
+node ./dist/index.js [USERNAME] [PASSWORD]
 # example
 node ./dist/index.js 3ckt74 wiub7
 ```
 
-5. Your storage data will be saved in ./storage.json file
+Your storage data will be saved in ./storage.json file
 
 ## Using firefox instead of chrome
 
-1. Install firefox browser for puppeteer
+Install firefox browser for [puppeteer](https://pptr.dev/)
 
 ```sh
 npx puppeteer browsers install firefox
 ```
 
-2. Use the `--browser` flag in cli
+Use the `--browser` flag in cli
 
-```sh
-node ./dist/index.js <USERNAME> <PASSWORD> --browser firefox
-# or shorter
-node ./dist/index.js <USERNAME> <PASSWORD> -b firefox
-```
+> ```sh
+> node ./dist/index.js [USERNAME] [PASSWORD] --browser firefox
+> # or shorter
+> node ./dist/index.js [USERNAME] [PASSWORD] -b firefox
+> ```
 
 ## Running in headless mode (without window)
 
-> Pass the `--headless` flag in cli
+Pass the `--headless` flag in cli
 
 ```sh
-node ./dist/index.js <USERNAME> <PASSWORD> --headless
+node ./dist/index.js [USERNAME] [PASSWORD] --headless
 # or shorter
-node ./dist/index.js <USERNAME> <PASSWORD> -h
+node ./dist/index.js [USERNAME] [PASSWORD] -h
 ```
