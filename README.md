@@ -38,6 +38,22 @@ Your storage data will be saved in ./storage.json file
 
 <hr />
 
+## Using env file to store password
+
+Pass the path to .env file instead of password in cli
+
+> ```sh
+> node ./dist/index.js 3ckt74 ./acounts.env
+> ```
+
+accounts.env (relative to `index.js`)
+
+```env
+3ckt74=wiub7
+```
+
+<hr />
+
 ## Using firefox instead of chrome
 
 Install firefox browser for [puppeteer](https://pptr.dev/)

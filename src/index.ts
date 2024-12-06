@@ -1,3 +1,4 @@
+import { startTime } from './performance';
 import { page, waitForClick, getText, waitUntilLoaded, closeBrowser } from './browser';
 import { getStorage, saveStorage } from './storage';
 import { username, password } from './arguments';
@@ -110,10 +111,11 @@ while (true) {
 
 logNewline();
 
-logSuccess(
-    `Session completed, ${totalAnswers.size} total / ${firstTryAnswers.size} first try`,
-);
+logSuccess(`Session completed - ${totalAnswers.size}/${firstTryAnswers.size} first try`);
 
 await saveStorage(storage);
 
 await closeBrowser();
+
+const durationSeconds = Math.round((performance.now() - startTime) / 10) / 100;
+logSuccess(`Script took: ${durationSeconds}s`);
