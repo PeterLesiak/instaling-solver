@@ -2,7 +2,7 @@
     "name": "instaling-solver",
     "type": "module",
     "scripts": {
-        "build": "tsup-node ./src/index.ts --format esm --out-dir build --sourcemap --minify",
+        "build": "tsup-node ./src/index.ts --format esm --out-dir build",
         "lint": "tsc",
         "format": "prettier . --write"
     },
