@@ -1,30 +1,32 @@
 # instaling-solver v1.0.0
 
-[1. How to use](#---how-to-use---)
-[2. Using firefox instead of chrome](#---using-firefox-instead-of-chrome---)
-[3. Running in headless mode (without window)](#---running-in-headless-mode-without-window---)
+[1. How to use](#how-to-use) <br />
+[2. Using firefox instead of chrome](#using-firefox-instead-of-chrome) <br />
+[3. Running in headless mode (without window)](#running-in-headless-mode-without-window) <br />
 
-## -- How to use --
+<hr />
 
-> 1. Clone or download this repository, example using git:
+## How to use
+
+1. Clone or download this repository, example using git:
 
 ```sh
 git clone https://github.com/PeterLesiak/instaling-solver.git
 ```
 
-> 2. Install dependencies, **NodeJS required**
+2. Install dependencies, **NodeJS required**
 
 ```sh
 npm ci
 ```
 
-> 3. Build from source
+3. Build from source
 
 ```sh
 npm run build
 ```
 
-> 4. Now you can start using the script
+4. Now you can start using the script
 
 ```sh
 node ./dist/index.js <USERNAME> <PASSWORD>
@@ -32,17 +34,17 @@ node ./dist/index.js <USERNAME> <PASSWORD>
 node ./dist/index.js 3ckt74 wiub7
 ```
 
-> 5. Your storage data will be saved in ./storage.json file
+5. Your storage data will be saved in ./storage.json file
 
-## -- Using firefox instead of chrome --
+## Using firefox instead of chrome
 
-> 1. Install firefox browser for puppeteer
+1. Install firefox browser for puppeteer
 
 ```sh
 npx puppeteer browsers install firefox
 ```
 
-> 2. Use the `--browser` flag in cli
+2. Use the `--browser` flag in cli
 
 ```sh
 node ./dist/index.js <USERNAME> <PASSWORD> --browser firefox
@@ -50,7 +52,7 @@ node ./dist/index.js <USERNAME> <PASSWORD> --browser firefox
 node ./dist/index.js <USERNAME> <PASSWORD> -b firefox
 ```
 
-## -- Running in headless mode (without window) --
+## Running in headless mode (without window)
 
 > Pass the `--headless` flag in cli
 
