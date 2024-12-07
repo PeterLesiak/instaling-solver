@@ -14,7 +14,7 @@ browserCreated();
 
 export const [page] = await browser.pages();
 
-export const waitForClick = async (
+export const waitAfterClick = async (
     selector: string,
 ): Promise<[HTTPResponse | null, void]> => {
     return Promise.all([page.waitForNavigation(), page.click(selector)]);

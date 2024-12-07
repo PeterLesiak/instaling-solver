@@ -1,8 +1,10 @@
-# instaling-solver v1.0.0
+# instaling-solver v1.1.0
 
 [1. How to use](#how-to-use) <br />
-[2. Using firefox instead of chrome](#using-firefox-instead-of-chrome) <br />
-[3. Running in headless mode (without window)](#running-in-headless-mode-without-window) <br />
+[2. Using .env file to store password (recommended)](#using-env-file-to-store-password-recommended) <br />
+[3. Using firefox instead of chrome](#using-firefox-instead-of-chrome) <br />
+[4. Running in headless mode (without window)](#running-in-headless-mode-without-window) <br />
+[5. Running infinite session (for fast learning)](#running-infinite-session-for-fast-learning) <br />
 
 <hr />
 
@@ -38,15 +40,15 @@ Your storage data will be saved in ./storage.json file
 
 <hr />
 
-## Using env file to store password
+## Using .env file to store password (recommended)
 
 Pass the path to .env file instead of password in cli
 
 > ```sh
-> node ./dist/index.js 3ckt74 ./acounts.env
+> node ./dist/index.js 3ckt74 ./accounts.env
 > ```
 
-accounts.env (relative to `index.js`)
+accounts.env (relative to root of repository)
 
 ```env
 3ckt74=wiub7
@@ -81,3 +83,17 @@ Pass the `--headless` flag in cli
 > # or shorter
 > node ./dist/index.js [USERNAME] [PASSWORD] -h
 > ```
+
+Running in headless mode should generally be faster
+
+## Running infinite session (for fast learning)
+
+Pass the `--infinite` flag in cli
+
+```sh
+node ./dist/index.js [USERNAME] [PASSWORD] --infinite
+# or shorter
+node ./dist/index.js [USERNAME] [PASSWORD] -i
+```
+
+Your storage will be saved after every session

@@ -19,6 +19,12 @@ const parsedArgs = parseArgs({
             short: 'h',
             default: false,
         },
+
+        infinite: {
+            type: 'boolean',
+            short: 'i',
+            default: false,
+        },
     },
 });
 
@@ -36,3 +42,5 @@ export const password = process.env[username] ?? passwordOrEnv;
 export const browser = parsedArgs.values.browser as SupportedBrowser;
 
 export const headless = parsedArgs.values.headless;
+
+export const infinite = parsedArgs.values.infinite;

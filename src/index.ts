@@ -1,7 +1,7 @@
 import { startTime } from './performance';
-import { page, waitForClick, getText, waitUntilLoaded, closeBrowser } from './browser';
+import { page, waitAfterClick, getText, waitUntilLoaded, closeBrowser } from './browser';
 import { getStorage, saveStorage } from './storage';
-import { username, password } from './arguments';
+import { username, password, infinite } from './arguments';
 import { logTask, logSuccess, logFailure, logNewline } from './logger';
 
 const storage = await getStorage();
@@ -15,7 +15,7 @@ await page.click('.fc-cta-consent');
 const userLogged = logTask(`Logging as ${username}`);
 await page.type('#log_email', username);
 await page.type('#log_password', password);
-await waitForClick('button[type=submit]');
+await waitAfterClick('button[type=submit]');
 userLogged();
 
 logSuccess(`Successfully logged as ${username}`);
@@ -76,7 +76,36 @@ while (true) {
     );
 
     if (finished) {
-        break;
+        if (!infinite) break;
+
+        await saveStorage(storage);
+
+        await waitAfterClick('#return_mainpage');
+
+        await page.goto(
+            `https://instaling.pl/ling2/html_app/app.php?child_id=${studentId}`,
+        );
+
+        await waitUntilLoaded();
+
+        const startingSession = await page.$eval(
+            '#start_session_page',
+            element => window.getComputedStyle(element).display != 'none',
+        );
+
+        logSuccess(
+            `${startingSession ? 'Starting new' : 'Continuing'} session with student_id ${studentId}`,
+        );
+
+        if (startingSession) {
+            await page.click('#start_session_button');
+        } else {
+            await page.click('#continue_session_button');
+        }
+
+        logNewline();
+
+        continue;
     }
 
     const translation = await getText('.translations');
