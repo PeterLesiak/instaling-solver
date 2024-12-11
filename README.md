@@ -31,9 +31,9 @@ Build from source
 Now you can start using the script
 
 > ```sh
-> node ./dist/index.js [USERNAME] [PASSWORD]
+> node ./build/index.js [USERNAME] [PASSWORD]
 > # example
-> node ./dist/index.js 3ckt74 wiub7
+> node ./build/index.js 3ckt74 wiub7
 > ```
 
 Your storage data will be saved in ./storage.json file
@@ -45,7 +45,7 @@ Your storage data will be saved in ./storage.json file
 Pass the path to .env file instead of password in cli
 
 > ```sh
-> node ./dist/index.js 3ckt74 ./accounts.env
+> node ./build/index.js 3ckt74 ./accounts.env
 > ```
 
 accounts.env (relative to root of repository)
@@ -67,21 +67,24 @@ Install firefox browser for [puppeteer](https://pptr.dev/)
 Use the `--browser` flag in cli
 
 > ```sh
-> node ./dist/index.js [USERNAME] [PASSWORD] --browser firefox
+> node ./build/index.js [USERNAME] [PASSWORD] --browser firefox
 > # or shorter
-> node ./dist/index.js [USERNAME] [PASSWORD] -b firefox
+> node ./build/index.js [USERNAME] [PASSWORD] -b firefox
 > ```
 
 <hr />
 
 ## Running in headless mode (without window)
 
+> [!WARNING]  
+> Headless mode is still in development, it may not work correctly.
+
 Pass the `--headless` flag in cli
 
 > ```sh
-> node ./dist/index.js [USERNAME] [PASSWORD] --headless
+> node ./build/index.js [USERNAME] [PASSWORD] --headless
 > # or shorter
-> node ./dist/index.js [USERNAME] [PASSWORD] -h
+> node ./build/index.js [USERNAME] [PASSWORD] -h
 > ```
 
 Running in headless mode should generally be faster
@@ -91,9 +94,9 @@ Running in headless mode should generally be faster
 Pass the `--infinite` flag in cli
 
 ```sh
-node ./dist/index.js [USERNAME] [PASSWORD] --infinite
+node ./build/index.js [USERNAME] [PASSWORD] --infinite
 # or shorter
-node ./dist/index.js [USERNAME] [PASSWORD] -i
+node ./build/index.js [USERNAME] [PASSWORD] -i
 ```
 
-Your storage will be saved after every session
+Your storage will be saved after every session completes
