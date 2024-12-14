@@ -76,9 +76,6 @@ Use the `--browser` flag in cli
 
 ## Running in headless mode (without window)
 
-> [!WARNING]  
-> Headless mode is still in development, it may not work correctly.
-
 Pass the `--headless` flag in cli
 
 > ```sh
