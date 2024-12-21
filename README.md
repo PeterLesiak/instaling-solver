@@ -1,4 +1,4 @@
-# instaling-solver v1.1.0
+# instaling-solver v1.1.1
 
 [1. How to use](#how-to-use) <br />
 [2. Using .env file to store password (recommended)](#using-env-file-to-store-password-recommended) <br />

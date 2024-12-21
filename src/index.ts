@@ -1,3 +1,5 @@
+import chalk from 'chalk';
+
 import { startTime } from './performance';
 import { page, waitAfterClick, getText, waitUntilLoaded, closeBrowser } from './browser';
 import { getStorage, saveStorage } from './storage';
@@ -113,7 +115,9 @@ while (true) {
     const record = storage[sentence];
 
     if (record) {
-        logSuccess(`Found in storage \`${sentence}\` => \`${record.answer}\``);
+        logSuccess(
+            `${chalk.green('Found')} in storage "${sentence}" => "${record.answer}"`,
+        );
 
         if (!totalAnswers.has(record.answer)) {
             firstTryAnswers.add(record.answer);
@@ -130,7 +134,7 @@ while (true) {
     if (!record) {
         const correct = await getText('#word');
 
-        logFailure(`Not in storage \`${sentence}\` => \`${correct}\``);
+        logFailure(`${chalk.red('Not found')} in storage "${sentence}" => "${correct}"`);
         storage[sentence] = { answer: correct, translation };
         totalAnswers.add(correct);
     }
@@ -140,7 +144,9 @@ while (true) {
 
 logNewline();
 
-logSuccess(`Session completed - ${totalAnswers.size}/${firstTryAnswers.size} first try`);
+logSuccess(
+    `Session completed - ${totalAnswers.size} first try / ${firstTryAnswers.size} total`,
+);
 
 await saveStorage(storage);
 
