@@ -127,7 +127,7 @@ while (true) {
         await page.type('#answer', record.answer);
     }
 
-    await page.click('#check_answer');
+    await page.click('#check');
 
     await waitUntilLoaded();
 
