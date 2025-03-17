@@ -110,7 +110,7 @@ while (true) {
         continue;
     }
 
-    const translation = await getText('.translations');
+    const translation = await getText('.translation');
     const sentence = await getText('.usage_example');
     const record = storage[sentence];
 
