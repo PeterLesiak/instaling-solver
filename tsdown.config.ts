@@ -1,8 +1,9 @@
 import { defineConfig } from 'tsdown';
 
 export default defineConfig({
+  name: 'instaling-solver',
   entry: './src/index.ts',
-  outDir: 'bin',
+  outDir: 'build',
   noExternal: () => true,
-  minify: true,
+  minify: { compress: true, mangle: { toplevel: true } },
 });
