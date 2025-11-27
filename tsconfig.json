@@ -1,24 +1,32 @@
 {
-    "compilerOptions": {
-        "allowImportingTsExtensions": true,
-        "isolatedModules": true,
-        "lib": ["ES2020", "DOM"],
-        "module": "ESNext",
-        "moduleDetection": "force",
-        "moduleResolution": "bundler",
-        "noEmit": true,
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitOverride": true,
-        "noUncheckedSideEffectImports": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "resolveJsonModule": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "target": "ESNext",
-        "useDefineForClassFields": true,
-        "verbatimModuleSyntax": true
+  "compilerOptions": {
+    /* Base Options */
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "esnext",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "composite": true,
+    "incremental": true,
+
+    /* Strictness */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+
+    /* Paths */
+    "paths": {
+      "~/*": ["./src/*"]
     },
 
-    "include": ["src", "./prettier.config.js"]
+    /* Cache */
+    "tsBuildInfoFile": "/node_modules/.cache/tsbuildinfo.json"
+  }
 }
