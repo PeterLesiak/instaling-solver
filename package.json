@@ -6,12 +6,25 @@
     "typecheck": "tsc",
     "format": "prettier . --write"
   },
-  "bin": "./build/index.js",
   "version": "2.0.0",
+  "homepage": "https://github.com/PeterLesiak/instaling-solver",
+  "author": {
+    "name": "Peter Lesiak",
+    "url": "https://github.com/PeterLesiak",
+    "email": "piolesiak12@gmail.com"
+  },
+  "description": "A modern CLI companion for automating your https://instaling.pl sessions",
+  "keywords": [
+    "instaling",
+    "automate",
+    "session",
+    "cli"
+  ],
   "license": "MIT",
   "files": [
     "./build"
   ],
+  "bin": "./build/index.js",
   "dependencies": {
     "boxen": "^8.0.1",
     "commander": "^14.0.2",

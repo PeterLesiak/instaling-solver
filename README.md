@@ -2,7 +2,7 @@
 
 # 🌟 instaling-solver
 
-_A modern CLI companion for automating your https://instaling.pl sessions_
+**A modern CLI companion for automating your https://instaling.pl sessions**
 
 ![Version](https://img.shields.io/badge/version-2.0.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-purple)
