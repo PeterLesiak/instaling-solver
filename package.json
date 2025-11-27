@@ -24,7 +24,7 @@
   "files": [
     "./build"
   ],
-  "bin": "./build/index.js",
+  "bin": "./build/index.mjs",
   "dependencies": {
     "boxen": "^8.0.1",
     "commander": "^14.0.2",
