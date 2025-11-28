@@ -29,7 +29,7 @@ program
     value => {
       if (!acceptedOperations.includes(value as any)) {
         logger.critical(
-          `Invalid config operation ${kleur.underline(value)}, accepted values: ${kleur.bold(acceptedOperations.join(', '))}`,
+          `Invalid config operation ${kleur.red(value)}, accepted values: ${kleur.bold(acceptedOperations.join(', '))}`,
         );
       }
 

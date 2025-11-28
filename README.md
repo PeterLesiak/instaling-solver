@@ -11,17 +11,17 @@
 </div>
 
 > [!IMPORTANT]  
-> This tool is intended for **personal educational automation only**. Use responsibly and accept the risks of possible account suspension.
+> This tool is intended for **personal educational automation only**. Use responsibly and accept the risk of possible account suspension.
 
 ## 📖 Table of Contents
 
-1. ✨ Overview
-2. 🚀 Features
-3. 📦 Installation & Setup
-4. 🧰 Usage Guide — CLI Commands
-5. ⚙️ Configuration Files Explained
-6. 🛠️ Developer Guide / Contributing
-7. 📄 License
+1. [✨ Overview](#-overview)
+2. [🚀 Features](#-features)
+3. [📦 Installation & Setup](#-installation--setup)
+4. [🧰 Usage Guide — CLI Commands](#-usage-guide--cli-commands)
+5. [⚙️ Configuration Files Explained](#️-configuration-files-explained)
+6. [🛠️ Developer Guide / Contributing](#️-developer-guide--contributing)
+7. [📄 License](#-license)
 
 ## ✨ Overview
 
@@ -38,32 +38,11 @@
 
 ## 📦 Installation & Setup
 
-### 1️⃣ Clone the Repository
-
 ```
-git clone https://github.com/PeterLesiak/instaling-solver
-cd instaling-solver
+npm install -g instaling-solver@latest
 ```
 
-### 2️⃣ Install Dependencies
-
 ```
-pnpm install
-```
-
-### 3️⃣ Run the CLI
-
-```
-./build/index.mjs
-./build/index.mjs help
-```
-
-### 4️⃣ (Optional) Setup an Alias
-
-```bash
-# For e.g. when using bash
-alias instaling-solver='~/instaling-solver/build/index.mjs'
-
 instaling-solver
 ```
 
@@ -78,9 +57,10 @@ Runs https://instaling.pl sessions using:
 - answer memory from `storage.json`
 
 ```
-./build/index.mjs solve
+instaling-solver solve
+
 # or shorter
-./build/index.mjs
+instaling-solver
 ```
 
 ### 🔹 `config` — Manage Solver Configuration
@@ -100,9 +80,9 @@ Deletes all config files (permanently).
 Examples:
 
 ```
-./build/index.mjs config find
-./build/index.mjs config init
-./build/index.mjs config clear
+instaling-solver config find
+instaling-solver config init
+instaling-solver config clear
 ```
 
 ### 🔹 `typewriter` — Test Typing Simulation
@@ -110,7 +90,7 @@ Examples:
 Simulates typing with your settings from `options.json`:
 
 ```
-./build/index.mjs typewriter
+instaling-solver typewriter
 ```
 
 ## ⚙️ Configuration Files Explained
@@ -124,9 +104,9 @@ Stores Instaling login credentials and account names.
 ```json
 [
   {
-    "name": "Optional account name to show instead of username",
+    "name": "Optional account name to display instead of username",
     "username": "Username to your account",
-    "password": "Password to your account (will not be hashed)"
+    "password": "Password to your account (will not be hashed!)"
   }
 ]
 ```
@@ -167,6 +147,35 @@ Internal memory for previously solved items.
 
 ## 🛠️ Developer Guide / Contributing
 
+### 1️⃣ Clone the Repository
+
+```
+git clone https://github.com/PeterLesiak/instaling-solver
+cd ./instaling-solver
+```
+
+### 2️⃣ Install Dependencies
+
+```
+pnpm install
+```
+
+### 3️⃣ Run the CLI
+
+```
+.instaling-solver
+.instaling-solver help
+```
+
+### 4️⃣ (Optional) Setup an Alias
+
+```bash
+# For e.g. when using bash
+alias instaling-solver='~/instaling-solverinstaling-solver'
+
+instaling-solver
+```
+
 > [!TIP]  
 > Use pnpm for all development commands.
 
@@ -175,10 +184,10 @@ Internal memory for previously solved items.
 | Purpose      | Command             |
 | ------------ | ------------------- |
 | Build binary | `pnpm build`        |
-| Run CLI      | `./build/index.mjs` |
+| Run CLI      | `.instaling-solver` |
 | Typecheck    | `pnpm typecheck`    |
 | Format code  | `pnpm format`       |
 
 ## 📄 License
 
-MIT License.
+[MIT License.](./LICENSE)

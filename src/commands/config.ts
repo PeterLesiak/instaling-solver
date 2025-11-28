@@ -3,7 +3,7 @@ import prompt from 'prompts';
 import { AccountsConfig, OptionsConfig, StorageConfig } from '~/config';
 import { logger } from '~/logger';
 
-export const acceptedOperations = ['find', 'clear', 'init'] as const;
+export const acceptedOperations = ['find', 'init', 'clear'] as const;
 
 export default async ({
   operation,
@@ -18,20 +18,6 @@ export default async ({
     logger.info(`Accounts config path: ${logger.path(accountsConfig.path)}`);
     logger.info(`Options config path: ${logger.path(optionsConfig.path)}`);
     logger.info(`Storage config path: ${logger.path(storageConfig.path)}`);
-  }
-
-  if (operation === 'clear') {
-    const { confirm } = await prompt({
-      name: 'confirm',
-      type: 'confirm',
-      message: 'Are you sure you want to *delete* all your configs?',
-    });
-
-    if (confirm) {
-      await accountsConfig.clear();
-      await optionsConfig.clear();
-      await storageConfig.clear();
-    }
   }
 
   if (operation === 'init') {
@@ -51,6 +37,20 @@ export default async ({
 
     if (storageConfigValid) {
       logger.info('The storage config file is already valid, skipping.');
+    }
+  }
+
+  if (operation === 'clear') {
+    const { confirm } = await prompt({
+      name: 'confirm',
+      type: 'confirm',
+      message: 'Are you sure you want to *delete* all your configs?',
+    });
+
+    if (confirm) {
+      await accountsConfig.clear();
+      await optionsConfig.clear();
+      await storageConfig.clear();
     }
   }
 };

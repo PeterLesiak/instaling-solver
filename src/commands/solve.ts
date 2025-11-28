@@ -149,11 +149,12 @@ export default async () => {
       `Learned answers:      ${kleur.yellow(sessionTracker.learned.toString().padStart(maxLength))}`,
     ],
     {
+      titleAlignment: 'center',
       title: 'Done - Summary',
-      borderColor: 'green',
       borderStyle: 'single',
+      borderColor: 'green',
       textAlignment: 'left',
-      padding: 2,
+      padding: 1,
     },
   );
 
