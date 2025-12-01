@@ -27,6 +27,7 @@
     },
 
     /* Cache */
-    "tsBuildInfoFile": "/node_modules/.cache/tsbuildinfo.json"
-  }
+    "tsBuildInfoFile": "./node_modules/.cache/tsbuildinfo.json"
+  },
+  "include": ["./src", "./tsdown.config.ts"]
 }

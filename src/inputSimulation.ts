@@ -1,6 +1,5 @@
 import type { OptionsConfigStore } from '~/config';
 import { delay, randomInt, randomLetter, type Miliseconds } from '~/utils';
-import { logger } from './logger';
 
 const charsPerMinute = (wpm: number) => wpm * 5;
 
