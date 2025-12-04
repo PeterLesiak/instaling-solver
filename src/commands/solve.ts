@@ -34,7 +34,7 @@ export default async () => {
 
   const selectedAccount = await accountsConfig.chooseAccount();
 
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: false, defaultViewport: null });
   const [startingPage] = await browser.pages();
   const page = startingPage ?? (await browser.newPage());
 

@@ -1,12 +1,16 @@
 {
   "name": "instaling-solver",
+  "version": "2.0.2",
   "type": "module",
   "scripts": {
     "build": "tsdown",
     "typecheck": "tsc",
     "format": "prettier . --write"
   },
-  "version": "2.0.1",
+  "bin": "./build/index.mjs",
+  "files": [
+    "./build"
+  ],
   "homepage": "https://github.com/PeterLesiak/instaling-solver",
   "author": {
     "name": "Peter Lesiak",
@@ -21,10 +25,6 @@
     "cli"
   ],
   "license": "MIT",
-  "files": [
-    "./build"
-  ],
-  "bin": "./build/index.mjs",
   "dependencies": {
     "boxen": "^8.0.1",
     "commander": "^14.0.2",
