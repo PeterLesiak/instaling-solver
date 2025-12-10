@@ -1,4 +1,5 @@
 import puppeteer, { type KeyInput } from 'puppeteer';
+import prompts from 'prompts';
 import kleur from 'kleur';
 
 import { simulateReactionTime, simulateTyping } from '~/inputSimulation';
@@ -27,7 +28,7 @@ export const website = {
   nextQuestionButtonSelector: '#nextword',
 };
 
-export default async () => {
+export default async ({ pause }: { pause: boolean }) => {
   const { accountsConfig } = await setupAccountsConfig();
   const { options } = await setupOptionsConfig();
   const { storageConfig } = await setupStorageConfig();
@@ -157,6 +158,14 @@ export default async () => {
       padding: 1,
     },
   );
+
+  if (pause) {
+    await prompts({
+      name: 'pause',
+      type: 'text',
+      message: 'Press ENTER to exit...',
+    });
+  }
 
   async function solveQuestion(): Promise<{
     question: string;

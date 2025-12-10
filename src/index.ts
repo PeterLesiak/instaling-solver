@@ -16,8 +16,9 @@ program
 program
   .command('solve', { isDefault: true })
   .description(`run sessions from the user's account (default)`)
-  .action(() => {
-    solve();
+  .option('-p, --pause', 'pause after the end of each session')
+  .action(({ pause }) => {
+    solve({ pause: pause ?? false });
   });
 
 program

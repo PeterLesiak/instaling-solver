@@ -63,6 +63,10 @@ instaling-solver solve
 instaling-solver
 ```
 
+#### `solve --pause`
+
+Waits for user input before the process exits.
+
 ### 🔹 `config` — Manage Solver Configuration
 
 #### `config find`
