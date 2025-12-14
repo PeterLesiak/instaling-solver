@@ -44,6 +44,8 @@ npm install -g instaling-solver@latest
 
 ```
 instaling-solver
+
+instaling-solver help
 ```
 
 ## 🧰 Usage Guide — CLI Commands
@@ -167,15 +169,14 @@ pnpm install
 ### 3️⃣ Run the CLI
 
 ```
-.instaling-solver
-.instaling-solver help
+node ./build/index.mjs
 ```
 
 ### 4️⃣ (Optional) Setup an Alias
 
 ```bash
 # For e.g. when using bash
-alias instaling-solver='~/instaling-solverinstaling-solver'
+alias instaling-solver='~/instaling-solver/build/index.mjs'
 
 instaling-solver
 ```
@@ -185,12 +186,12 @@ instaling-solver
 
 ### Useful Commands
 
-| Purpose      | Command             |
-| ------------ | ------------------- |
-| Build binary | `pnpm build`        |
-| Run CLI      | `.instaling-solver` |
-| Typecheck    | `pnpm typecheck`    |
-| Format code  | `pnpm format`       |
+| Purpose      | Command                  |
+| ------------ | ------------------------ |
+| Build binary | `pnpm build`             |
+| Run CLI      | `node ./build/index.mjs` |
+| Typecheck    | `pnpm typecheck`         |
+| Format code  | `pnpm format`            |
 
 ## 📄 License
 
