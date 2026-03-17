@@ -3,19 +3,7 @@ import kleur from 'kleur';
 import { homedir } from 'node:os';
 import { normalize, sep } from 'node:path';
 
-interface Logger {
-  line(): void;
-  clearLine(): void;
-  writeInThisLine(message: string, clearLine?: boolean): void;
-  info(message: string): void;
-  warn(message: string): void;
-  error(message: string): void;
-  critical(message: string): never;
-  printBox(values: string[], options: BoxenOptions): void;
-  path(path: string): string;
-}
-
-export const logger: Logger = {
+export const logger = {
   line(): void {
     console.log();
   },
@@ -25,7 +13,7 @@ export const logger: Logger = {
     process.stdout.cursorTo(0);
   },
 
-  writeInThisLine(message: string, clearLine: boolean = true): void {
+  write(message: string, clearLine: boolean = true): void {
     if (clearLine) {
       this.clearLine();
     }
@@ -45,10 +33,8 @@ export const logger: Logger = {
     console.log(`[ ${kleur.red('ERROR')} ] ${message}`);
   },
 
-  critical(message: string): never {
+  critical(message: string): void {
     console.log(`[ ${kleur.magenta('CRITICAL')} ] ${message}`);
-
-    process.exit(1);
   },
 
   printBox(values: string[], options: BoxenOptions): void {

@@ -9,7 +9,7 @@ import { delay, randomInt, type Miliseconds } from '~/utils';
 
 export const website = {
   loginUrl: 'https://instaling.pl/teacher.php?page=login',
-  sessionUrl: 'https://instaling.pl/ling2/html_app/app.php?child_id=',
+  sessionUrl: 'https://instaling.pl/app/session/app.php?child_id=',
   cookiesModalSelector: '.fc-consent-root',
   loginInputSelector: '[name=log_email]',
   passwordInputSelector: '[name=log_password]',
@@ -64,6 +64,7 @@ export default async ({ pause }: { pause: boolean }) => {
     await browser.close();
 
     logger.critical('Failed to retrieve get parameter "student_id" after login.');
+    process.exit(1);
   }
 
   const uniqueQuestionsStorage = new Set<string>();
@@ -180,7 +181,7 @@ export default async ({ pause }: { pause: boolean }) => {
     let answer = storageConfig.findInStore(question, translation)?.answer;
     let isIntentionalError = false;
 
-    logger.writeInThisLine(
+    logger.write(
       `${kleur.cyan(translation)} ➡ ${answer ? kleur.dim(answer) : kleur.yellow('Not in storage')}`,
     );
 
@@ -211,10 +212,10 @@ export default async ({ pause }: { pause: boolean }) => {
           output += key;
         }
 
-        logger.writeInThisLine(
+        logger.write(
           `${kleur.cyan(translation)} ➡ ${isIntentionalError ? kleur.red(output) : kleur.green(output)}`,
         );
-        logger.writeInThisLine(kleur.dim(answer.substring(output.length)), false);
+        logger.write(kleur.dim(answer.substring(output.length)), false);
         process.stdout.moveCursor(output.length - answer.length, 0);
       });
 
