@@ -23,7 +23,7 @@ export const website = {
   questionContainerSelector: '.usage_example',
   originalTranslationSelector: '.translation',
   answerInputSelector: '#answer',
-  submitAnswerButtonSelector: '#check_answer',
+  submitAnswerButtonSelector: '#check',
   correctAnswerSelector: '#word',
   nextQuestionButtonSelector: '#nextword',
 };
