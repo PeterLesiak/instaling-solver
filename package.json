@@ -1,6 +1,6 @@
 {
   "name": "instaling-solver",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "scripts": {
     "prepublishOnly": "pnpm run build",
     "build": "tsdown",
@@ -27,19 +27,19 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "boxen": "^8.0.1",
-    "commander": "^14.0.2",
-    "env-paths": "^3.0.0",
+    "boxen": "^9.0.0",
+    "commander": "^15.0.0",
+    "env-paths": "^4.0.0",
     "kleur": "^4.1.5",
     "prompts": "^2.4.2",
     "puppeteer": "latest",
-    "zod": "^4.1.13"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
-    "@types/node": "^24.10.1",
+    "@types/node": "^26.6.3",
     "@types/prompts": "^2.4.9",
-    "prettier": "^3.7.3",
-    "tsdown": "0.17.0-beta.4",
-    "typescript": "^5.9.3"
+    "prettier": "^3.9.9",
+    "tsdown": "0.23.0",
+    "typescript": "^7.0.2"
   }
 }

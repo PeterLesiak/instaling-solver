@@ -19,8 +19,8 @@ export default async () => {
       output += step.key;
     }
 
-    logger.writeInThisLine(output);
-    logger.writeInThisLine(kleur.dim(input.substring(output.length)), false);
+    logger.write(output);
+    logger.write(kleur.dim(input.substring(output.length)), false);
     process.stdout.moveCursor(output.length - input.length, 0);
 
     await delay(step.delay);

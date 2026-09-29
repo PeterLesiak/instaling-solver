@@ -16,9 +16,10 @@ program
 program
   .command('solve', { isDefault: true })
   .description(`run sessions from the user's account (default)`)
+  .option('-a, --account [ACCOUNT]', 'select an account from the config')
   .option('-p, --pause', 'pause after the end of each session')
-  .action(({ pause }) => {
-    solve({ pause: pause ?? false });
+  .action(({ account, pause }) => {
+    solve({ account, pause: pause ?? false });
   });
 
 program

@@ -33,8 +33,10 @@ export const logger = {
     console.log(`[ ${kleur.red('ERROR')} ] ${message}`);
   },
 
-  critical(message: string): void {
+  critical(message: string): never {
     console.log(`[ ${kleur.magenta('CRITICAL')} ] ${message}`);
+
+    process.exit(1);
   },
 
   printBox(values: string[], options: BoxenOptions): void {

@@ -98,31 +98,42 @@ export class AccountsConfig extends Config<AccountsConfigStore> {
 
   selectedAccountIndex: number | null = null;
 
-  async chooseAccount(): Promise<AccountsConfigStore[number]> {
+  async chooseAccount(name?: string): Promise<AccountsConfigStore[number]> {
     const accounts = this.store;
 
     if (!accounts || !accounts.length) {
       logger.critical('Accounts config could not find any account to select.');
+      process.exit();
     }
 
-    if (accounts.length == 1) {
-      const selectedAccount = accounts[0]!;
-      this.selectedAccountIndex = 0;
+    if (name) {
+      this.selectedAccountIndex = accounts.findIndex(account => account.name === name);
 
-      logger.info(
-        `Selecting the only account available: ${kleur.green(selectedAccount.name ?? selectedAccount.username)}`,
-      );
+      if (this.selectedAccountIndex < 0) {
+        logger.critical(`Failed to find account: ${name}`);
+        process.exit();
+      }
     } else {
-      const { selectedAccount } = await prompt({
-        name: 'selectedAccount',
-        type: 'select',
-        choices: accounts.map((account, i) => ({
-          title: account.name || account.username,
-          value: i,
-        })),
-      });
+      if (accounts.length == 1) {
+        const selectedAccount = accounts[0]!;
+        this.selectedAccountIndex = 0;
 
-      this.selectedAccountIndex = selectedAccount;
+        logger.info(
+          `Selecting the only account available: ${kleur.green(selectedAccount.name ?? selectedAccount.username)}`,
+        );
+      } else {
+        const { selectedAccount } = await prompt({
+          name: 'selectedAccount',
+          type: 'select',
+          message: 'Select a configured instaling account',
+          choices: accounts.map((account, i) => ({
+            title: account.name || account.username,
+            value: i,
+          })),
+        });
+
+        this.selectedAccountIndex = selectedAccount;
+      }
     }
 
     return accounts![this.selectedAccountIndex!]!;

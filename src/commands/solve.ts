@@ -28,12 +28,12 @@ export const website = {
   nextQuestionButtonSelector: '#nextword',
 };
 
-export default async ({ pause }: { pause: boolean }) => {
+export default async ({ account, pause }: { account?: string; pause: boolean }) => {
   const { accountsConfig } = await setupAccountsConfig();
   const { options } = await setupOptionsConfig();
   const { storageConfig } = await setupStorageConfig();
 
-  const selectedAccount = await accountsConfig.chooseAccount();
+  const selectedAccount = await accountsConfig.chooseAccount(account);
 
   const browser = await puppeteer.launch({ headless: false, defaultViewport: null });
   const [startingPage] = await browser.pages();
