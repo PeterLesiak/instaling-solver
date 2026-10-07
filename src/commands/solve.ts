@@ -28,7 +28,15 @@ export const website = {
   nextQuestionButtonSelector: '#nextword',
 };
 
-export default async ({ account, pause }: { account?: string; pause: boolean }) => {
+export default async ({
+  account,
+  pause,
+  infinite,
+}: {
+  account?: string;
+  pause: boolean;
+  infinite: boolean;
+}) => {
   const { accountsConfig } = await setupAccountsConfig();
   const { options } = await setupOptionsConfig();
   const { storageConfig } = await setupStorageConfig();
@@ -67,98 +75,13 @@ export default async ({ account, pause }: { account?: string; pause: boolean }) 
     process.exit(1);
   }
 
-  const uniqueQuestionsStorage = new Set<string>();
+  await solveSession();
 
-  const sessionTracker = {
-    totalQuestions: 0,
-    uniqueQuestions: 0,
-    firstTimeCorrect: 0,
-    intentionalErrors: 0,
-    learned: 0,
-  };
-
-  await page.goto(`${website.sessionUrl}${studentId}`);
-
-  await waitUntilLoaded();
-  await simulateReactionTime(options.reactionTime);
-
-  logger.line();
-
-  try {
-    await page.click(website.startSessionButtonSelector);
-    logger.info(`Starting new session with student_id = ${studentId}`);
-  } catch {
-    await page.click(website.continueSessionButtonSelector);
-    logger.info(`Continuing existing session with student_id = ${studentId}`);
-  }
-
-  const safetyIterationLimit = 200;
-  let safetyIterationIndex = 0;
-
-  while (true) {
-    if (++safetyIterationIndex > safetyIterationLimit) {
-      logger.error(
-        `Session while loop exceeded safety limit of ${safetyIterationLimit}, breaking from it.`,
-      );
-      break;
-    }
-
-    await waitUntilLoaded();
-
-    const finished = await page.$eval(
-      website.finishModalSelector,
-      element => window.getComputedStyle(element).display !== 'none',
-    );
-
-    if (finished) break;
-
-    const { question, state } = await solveQuestion();
-
-    sessionTracker.totalQuestions += 1;
-
-    if (!uniqueQuestionsStorage.has(question)) {
-      if (state === 'correct') {
-        sessionTracker.firstTimeCorrect += 1;
-      }
-
-      sessionTracker.uniqueQuestions += 1;
-      uniqueQuestionsStorage.add(question);
-    }
-
-    if (state === 'intentionalError') {
-      sessionTracker.intentionalErrors += 1;
-    }
-
-    if (state === 'learned') {
-      sessionTracker.learned += 1;
+  if (infinite) {
+    while (true) {
+      await solveSession();
     }
   }
-
-  await storageConfig.syncWithStore('write');
-
-  await browser.close();
-
-  const maxLength = Object.values(sessionTracker)
-    .map(v => v.toString().length)
-    .reduce((max, v) => (v > max ? v : max));
-
-  logger.printBox(
-    [
-      `Total questions:      ${kleur.yellow(sessionTracker.totalQuestions.toString().padStart(maxLength))}`,
-      `Unique questions:     ${kleur.yellow(sessionTracker.uniqueQuestions.toString().padStart(maxLength))}`,
-      `First time correct:   ${kleur.yellow(sessionTracker.firstTimeCorrect.toString().padStart(maxLength))}`,
-      `Intentional errors:   ${kleur.yellow(sessionTracker.intentionalErrors.toString().padStart(maxLength))}`,
-      `Learned answers:      ${kleur.yellow(sessionTracker.learned.toString().padStart(maxLength))}`,
-    ],
-    {
-      titleAlignment: 'center',
-      title: 'Done - Summary',
-      borderStyle: 'single',
-      borderColor: 'green',
-      textAlignment: 'left',
-      padding: 1,
-    },
-  );
 
   if (pause) {
     await prompts({
@@ -166,6 +89,101 @@ export default async ({ account, pause }: { account?: string; pause: boolean }) 
       type: 'text',
       message: 'Press ENTER to exit...',
     });
+  }
+
+  await browser.close();
+
+  async function solveSession(): Promise<void> {
+    const uniqueQuestionsStorage = new Set<string>();
+
+    const sessionTracker = {
+      totalQuestions: 0,
+      uniqueQuestions: 0,
+      firstTimeCorrect: 0,
+      intentionalErrors: 0,
+      learned: 0,
+    };
+
+    await page.goto(`${website.sessionUrl}${studentId}`);
+
+    await waitUntilLoaded();
+    await simulateReactionTime(options.reactionTime);
+
+    logger.line();
+
+    try {
+      await page.click(website.startSessionButtonSelector);
+      logger.info(`Starting new session with student_id = ${studentId}`);
+    } catch {
+      await page.click(website.continueSessionButtonSelector);
+      logger.info(`Continuing existing session with student_id = ${studentId}`);
+    }
+
+    const safetyIterationLimit = 200;
+    let safetyIterationIndex = 0;
+
+    while (true) {
+      if (++safetyIterationIndex > safetyIterationLimit) {
+        logger.error(
+          `Session while loop exceeded safety limit of ${safetyIterationLimit}, breaking from it.`,
+        );
+        break;
+      }
+
+      await waitUntilLoaded();
+
+      const finished = await page.$eval(
+        website.finishModalSelector,
+        element => window.getComputedStyle(element).display !== 'none',
+      );
+
+      if (finished) break;
+
+      const { question, state } = await solveQuestion();
+
+      sessionTracker.totalQuestions += 1;
+
+      if (!uniqueQuestionsStorage.has(question)) {
+        if (state === 'correct') {
+          sessionTracker.firstTimeCorrect += 1;
+        }
+
+        sessionTracker.uniqueQuestions += 1;
+        uniqueQuestionsStorage.add(question);
+      }
+
+      if (state === 'intentionalError') {
+        sessionTracker.intentionalErrors += 1;
+      }
+
+      if (state === 'learned') {
+        sessionTracker.learned += 1;
+      }
+    }
+
+    await storageConfig.syncWithStore('write');
+
+    const maxLength = Object.values(sessionTracker)
+      .map(v => v.toString().length)
+      .reduce((max, v) => (v > max ? v : max));
+
+    logger.printBox(
+      [
+        `Total questions:      ${kleur.yellow(sessionTracker.totalQuestions.toString().padStart(maxLength))}`,
+        `Unique questions:     ${kleur.yellow(sessionTracker.uniqueQuestions.toString().padStart(maxLength))}`,
+        `First time correct:   ${kleur.yellow(sessionTracker.firstTimeCorrect.toString().padStart(maxLength))}`,
+        `Intentional errors:   ${kleur.yellow(sessionTracker.intentionalErrors.toString().padStart(maxLength))}`,
+        `Learned answers:      ${kleur.yellow(sessionTracker.learned.toString().padStart(maxLength))}`,
+      ],
+      {
+        titleAlignment: 'center',
+        title: 'Done - Summary',
+        borderStyle: 'single',
+        borderColor: 'green',
+        textAlignment: 'left',
+        padding: 1,
+      },
+    );
   }
 
   async function solveQuestion(): Promise<{

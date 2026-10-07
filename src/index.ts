@@ -18,8 +18,9 @@ program
   .description(`run sessions from the user's account (default)`)
   .option('-a, --account [ACCOUNT]', 'select an account from the config')
   .option('-p, --pause', 'pause after the end of each session')
-  .action(({ account, pause }) => {
-    solve({ account, pause: pause ?? false });
+  .option('-b, --ban', 'attempts to solve infinite sessions')
+  .action(({ account, pause, ban }) => {
+    solve({ account, pause: pause ?? false, infinite: ban ?? false });
   });
 
 program
